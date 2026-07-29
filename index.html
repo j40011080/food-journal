@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食記護照</title>
+
+<!-- App Icon（美食主題） -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMUYyQTI4Ii8+CiAgPHBhdGggZD0iTTUwIDIwYy0yIDAtNCA4LTQgMTRzMiA0IDIgOC0zIDQtMyA4aDEwYzAtNC0zLTQtMy04czItMiAyLTgtMi0xNC00LTE0eiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTYyIDIyYy0xLjUgMC0zIDctMyAxMnMxLjUgMy41IDEuNSA3LTIuNSAzLjUtMi41IDdoOGMwLTMuNS0yLjUtMy41LTIuNS03czEuNS0yIDEuNS03LTEuNS0xMi0zLTEyeiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIyOCIgcnk9IjEwIiBmaWxsPSIjRkJGNkVDIi8+CiAgPHBhdGggZD0iTTIyIDYyYzAgMTIgMTIuNSAyMCAyOCAyMHMyOC04IDI4LTIweiIgZmlsbD0iI0MxNTAyRSIvPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMjgiIHJ5PSI5IiBmaWxsPSIjRkJGNkVDIi8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjIiIHJ4PSIyMiIgcnk9IjYiIGZpbGw9IiM2QjhGNzEiIG9wYWNpdHk9IjAuODUiLz4KICA8bGluZSB4MT0iNjYiIHkxPSI0OCIgeDI9Ijc2IiB5Mj0iMzAiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNzEiIHkxPSI1MCIgeDI9IjgxIiB5Mj0iMzIiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMUYyQTI4Ii8+CiAgPHBhdGggZD0iTTUwIDIwYy0yIDAtNCA4LTQgMTRzMiA0IDIgOC0zIDQtMyA4aDEwYzAtNC0zLTQtMy04czItMiAyLTgtMi0xNC00LTE0eiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTYyIDIyYy0xLjUgMC0zIDctMyAxMnMxLjUgMy41IDEuNSA3LTIuNSAzLjUtMi41IDdoOGMwLTMuNS0yLjUtMy41LTIuNS03czEuNS0yIDEuNS03LTEuNS0xMi0zLTEyeiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIyOCIgcnk9IjEwIiBmaWxsPSIjRkJGNkVDIi8+CiAgPHBhdGggZD0iTTIyIDYyYzAgMTIgMTIuNSAyMCAyOCAyMHMyOC04IDI4LTIweiIgZmlsbD0iI0MxNTAyRSIvPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMjgiIHJ5PSI5IiBmaWxsPSIjRkJGNkVDIi8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjIiIHJ4PSIyMiIgcnk9IjYiIGZpbGw9IiM2QjhGNzEiIG9wYWNpdHk9IjAuODUiLz4KICA8bGluZSB4MT0iNjYiIHkxPSI0OCIgeDI9Ijc2IiB5Mj0iMzAiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNzEiIHkxPSI1MCIgeDI9IjgxIiB5Mj0iMzIiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==">
+<meta name="theme-color" content="#1F2A28">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A28;
+    --ink-2:#2A3733;
+    --paper:#FBF6EC;
+    --paper-dim:#F0E9D8;
+    --turmeric:#D9A02D;
+    --chili:#C1502E;
+    --sage:#6B8F71;
+    --line:rgba(251,246,236,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans TC',sans-serif;
+    background:var(--ink);
+    color:var(--paper);
+    min-height:100vh;
+  }
+  .app{
+    max-width:640px;
+    margin:0 auto;
+    padding:20px 16px 60px;
+  }
+  header.hero{
+    padding:22px 4px 26px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  header.hero .icon{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    flex-shrink:0;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.24em;
+    color:var(--turmeric);
+    text-transform:uppercase;
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900;
+    font-size:30px;
+    margin:0 0 8px;
+    letter-spacing:0.02em;
+  }
+  .sub{
+    font-size:13.5px;
+    color:rgba(251,246,236,0.62);
+    line-height:1.6;
+    margin:0;
+  }
+
+  /* Tabs styled like passport stamps */
+  .tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+  }
+  .tab-btn{
+    flex:1;
+    padding:12px 10px;
+    background:transparent;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    color:rgba(251,246,236,0.55);
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:all .18s ease;
+    letter-spacing:0.04em;
+  }
+  .tab-btn.active{
+    background:var(--turmeric);
+    border-color:var(--turmeric);
+    color:var(--ink);
+  }
+  .tab-btn:not(.active):hover{
+    border-color:var(--turmeric);
+    color:var(--paper);
+  }
+
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .card{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:14px;
+  }
+
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--ink-2);
+    margin:14px 0 6px;
+    letter-spacing:0.02em;
+  }
+  label:first-child{margin-top:0;}
+  select, input[type=text], textarea{
+    width:100%;
+    padding:11px 12px;
+    border-radius:8px;
+    border:1.5px solid #DCD3BC;
+    background:#FFFEFA;
+    font-family:'Noto Sans TC',sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  select:focus, input:focus, textarea:focus{
+    outline:2px solid var(--turmeric);
+    outline-offset:1px;
+    border-color:var(--turmeric);
+  }
+  textarea{resize:vertical;min-height:70px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+  .file-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 14px;
+    background:var(--paper-dim);
+    border:1.5px dashed #C9BB99;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    color:var(--ink-2);
+  }
+  .photo-preview{
+    margin-top:10px;
+    max-width:160px;
+    border-radius:8px;
+    display:none;
+    border:1px solid #DCD3BC;
+  }
+
+  .submit-btn{
+    width:100%;
+    margin-top:18px;
+    padding:13px;
+    background:var(--chili);
+    color:var(--paper);
+    border:none;
+    border-radius:9px;
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    letter-spacing:0.03em;
+  }
+  .submit-btn:active{transform:scale(0.99);}
+  .submit-btn:disabled{opacity:0.6;cursor:default;}
+  .status-msg{
+    font-size:13px;
+    margin-top:10px;
+    color:var(--sage);
+    display:none;
+  }
+
+  /* Browse tab */
+  .filter-bar{
+    display:flex;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .filter-bar select{flex:1;}
+
+  .entry{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:12px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .entry-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    cursor:pointer;
+  }
+  .stamp{
+    flex-shrink:0;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:13px;
+    color:#fff;
+  }
+  .cat-西式{background:var(--chili);}
+  .cat-中式{background:var(--turmeric);color:var(--ink);}
+  .cat-韓式{background:#B23A6B;}
+  .cat-泰式{background:var(--sage);}
+  .cat-越式{background:#3E7C8C;}
+  .cat-其他{background:#8A7E68;}
+
+  .entry-title{flex:1;min-width:0;}
+  .entry-title .name{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:16px;
+    margin:0;
+  }
+  .entry-title .meta{
+    font-size:12px;
+    color:#6B6250;
+    margin:2px 0 0;
+  }
+  .chevron{
+    color:#B7AB8E;
+    font-size:14px;
+    transition:transform .18s ease;
+  }
+  .entry.open .chevron{transform:rotate(90deg);}
+
+  .entry-body{
+    display:none;
+    padding:0 16px 16px;
+    border-top:1px solid #EDE5D2;
+  }
+  .entry.open .entry-body{display:block;}
+  .entry-body .field{margin-top:12px;}
+  .entry-body .field-label{
+    font-size:11.5px;
+    font-weight:700;
+    color:#8A7E68;
+    letter-spacing:0.03em;
+    margin-bottom:4px;
+  }
+  .entry-body a{color:var(--chili);word-break:break-all;}
+  .entry-body .note{font-size:13.5px;line-height:1.6;color:var(--ink-2);}
+  .entry-body img{
+    max-width:100%;
+    border-radius:8px;
+    margin-top:6px;
+    display:block;
+  }
+  .del-btn{
+    margin-top:14px;
+    background:none;
+    border:1px solid #D9C7C7;
+    color:var(--chili);
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+
+  .empty{
+    text-align:center;
+    padding:40px 20px;
+    color:rgba(251,246,236,0.5);
+    font-size:14px;
+    line-height:1.7;
+  }
+  .loading{text-align:center;padding:30px;color:rgba(251,246,236,0.5);font-size:13px;}
+  .count-tag{
+    font-size:12px;
+    color:rgba(251,246,236,0.5);
+    margin-bottom:10px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="20" fill="#1F2A28"/>
+      <path d="M50 20c-2 0-4 8-4 14s2 4 2 8-3 4-3 8h10c0-4-3-4-3-8s2-2 2-8-2-14-4-14z" fill="#D9A02D" opacity="0.9"/>
+      <path d="M62 22c-1.5 0-3 7-3 12s1.5 3.5 1.5 7-2.5 3.5-2.5 7h8c0-3.5-2.5-3.5-2.5-7s1.5-2 1.5-7-1.5-12-3-12z" fill="#D9A02D" opacity="0.7"/>
+      <ellipse cx="50" cy="66" rx="28" ry="10" fill="#FBF6EC"/>
+      <path d="M22 62c0 12 12.5 20 28 20s28-8 28-20z" fill="#C1502E"/>
+      <ellipse cx="50" cy="62" rx="28" ry="9" fill="#FBF6EC"/>
+      <ellipse cx="50" cy="62" rx="22" ry="6" fill="#6B8F71" opacity="0.85"/>
+      <line x1="66" y1="48" x2="76" y2="30" stroke="#FBF6EC" stroke-width="3" stroke-linecap="round"/>
+      <line x1="71" y1="50" x2="81" y2="32" stroke="#FBF6EC" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <p class="eyebrow">美食共享手帳</p>
+      <h1 style="margin-bottom:0;">食記護照</h1>
+    </div>
+  </header>
+  <p class="sub" style="margin:-8px 0 18px;">登記你們吃過的每一家店，兩人共用同一份紀錄（Firebase 即時同步）。</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="add">📝 登記</button>
+    <button class="tab-btn" data-tab="browse">📖 閱覽</button>
+  </div>
+
+  <!-- 登記頁 -->
+  <div class="panel active" id="panel-add">
+    <div class="card">
+      <label for="f-county">縣市</label>
+      <select id="f-county"></select>
+
+      <label for="f-category">分類</label>
+      <select id="f-category">
+        <option value="西式">西式</option>
+        <option value="中式">中式</option>
+        <option value="韓式">韓式</option>
+        <option value="泰式">泰式</option>
+        <option value="越式">越式</option>
+        <option value="其他">其他</option>
+      </select>
+
+      <label for="f-name">美食店名</label>
+      <input type="text" id="f-name" placeholder="例如：老王牛肉麵">
+
+      <label for="f-address">地址或地址連結</label>
+      <input type="text" id="f-address" placeholder="貼上地址，或 Google 地圖連結">
+
+      <label for="f-note">補充說明</label>
+      <textarea id="f-note" placeholder="推薦菜色、心得、價位等..."></textarea>
+
+      <label>照片（可選）</label>
+      <label class="file-btn" for="f-photo">📷 選擇照片</label>
+      <input type="file" id="f-photo" accept="image/*" style="display:none">
+      <img id="f-photo-preview" class="photo-preview">
+
+      <button class="submit-btn" id="submit-btn">儲存這筆紀錄</button>
+      <p class="status-msg" id="status-msg">✓ 已儲存！</p>
+    </div>
+  </div>
+
+  <!-- 閱覽頁 -->
+  <div class="panel" id="panel-browse">
+    <div class="filter-bar">
+      <select id="filter-county"><option value="">全部縣市</option></select>
+      <select id="filter-category">
+        <option value="">全部分類</option>
+        <option value="西式">西式</option>
+        <option value="中式">中式</option>
+        <option value="韓式">韓式</option>
+        <option value="泰式">泰式</option>
+        <option value="越式">越式</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <p class="count-tag" id="count-tag"></p>
+    <div id="entry-list"><div class="loading">讀取中...</div></div>
+  </div>
+</div>
+
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+// --- Firebase 設定 ---
+const firebaseConfig = {
+    apiKey: "AIzaSyCu6QUhZnaM0xrc-ai9DfKbRifURGZiJr0",
+    authDomain: "food-journal-12172.firebaseapp.com",
+    databaseURL: "https://food-journal-12172-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "food-journal-12172",
+    storageBucket: "food-journal-12172.firebasestorage.app",
+    messagingSenderId: "123228780699",
+    appId: "1:123228780699:web:56b0961043128de8b9ae3e"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const entriesRef = db.ref('entries');
+
+const COUNTIES = ["台北市","新北市","桃園市","台中市","台南市","高雄市","基隆市","新竹市","新竹縣","苗栗縣","彰化縣","南投縣","雲林縣","嘉義市","嘉義縣","屏東縣","宜蘭縣","花蓮縣","台東縣","澎湖縣","金門縣","連江縣"];
+let entries = [];
+let openEntryId = null;
+let pendingPhoto = null;
+
+function populateCounties(){
+  const addSel = document.getElementById('f-county');
+  const filterSel = document.getElementById('filter-county');
+  COUNTIES.forEach(c=>{
+    addSel.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
+    filterSel.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
+  });
+}
+
+// --- Tabs ---
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab === 'browse') filterAndRender();
+  });
+});
+
+// --- Photo upload with compression ---
+document.getElementById('f-photo').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const maxW = 700;
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      pendingPhoto = canvas.toDataURL('image/jpeg', 0.65);
+      const preview = document.getElementById('f-photo-preview');
+      preview.src = pendingPhoto;
+      preview.style.display = 'block';
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// --- Save entry ---
+document.getElementById('submit-btn').addEventListener('click', async ()=>{
+  const county = document.getElementById('f-county').value;
+  const category = document.getElementById('f-category').value;
+  const name = document.getElementById('f-name').value.trim();
+  const address = document.getElementById('f-address').value.trim();
+  const note = document.getElementById('f-note').value.trim();
+
+  if(!name){
+    alert('請輸入美食店名');
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '儲存中...';
+
+  try{
+    const newEntry = {
+      county, category, name, address, note,
+      photo: pendingPhoto || null,
+      createdAt: new Date().toISOString()
+    };
+    await entriesRef.push(newEntry);
+
+    // reset form
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-address').value = '';
+    document.getElementById('f-note').value = '';
+    document.getElementById('f-photo').value = '';
+    document.getElementById('f-photo-preview').style.display = 'none';
+    pendingPhoto = null;
+
+    const msg = document.getElementById('status-msg');
+    msg.style.display = 'block';
+    setTimeout(()=>{ msg.style.display = 'none'; }, 2200);
+  }catch(err){
+    console.error(err);
+    alert('儲存失敗，請再試一次：' + (err && err.message ? err.message : ''));
+  }finally{
+    btn.disabled = false;
+    btn.textContent = '儲存這筆紀錄';
+  }
+});
+
+// --- Realtime sync from Firebase ---
+entriesRef.on('value', (snapshot)=>{
+  const val = snapshot.val() || {};
+  entries = Object.keys(val).map(id => ({ id, ...val[id] }))
+    .sort((a,b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+  filterAndRender();
+}, (err)=>{
+  console.error(err);
+  document.getElementById('entry-list').innerHTML =
+    '<div class="empty">讀取失敗，請檢查 Firebase 設定與資料庫規則</div>';
+});
+
+// --- Render browse list ---
+function filterAndRender(){
+  const fc = document.getElementById('filter-county').value;
+  const fcat = document.getElementById('filter-category').value;
+  const filtered = entries.filter(e=>
+    (!fc || e.county === fc) && (!fcat || e.category === fcat)
+  );
+
+  document.getElementById('count-tag').textContent = `共 ${filtered.length} 筆紀錄`;
+
+  const listEl = document.getElementById('entry-list');
+  if(filtered.length === 0){
+    listEl.innerHTML = '<div class="empty">目前沒有符合條件的紀錄<br>去「登記」分頁新增第一筆吧 🍜</div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(e=>{
+    const isOpen = e.id === openEntryId;
+    const isLink = /^https?:\/\//i.test(e.address || '');
+    const addressHtml = e.address
+      ? (isLink ? `<a href="${escapeAttr(e.address)}" target="_blank" rel="noopener">${escapeHtml(e.address)}</a>` : escapeHtml(e.address))
+      : '（未填寫）';
+    return `
+      <div class="entry ${isOpen?'open':''}" data-id="${e.id}">
+        <div class="entry-head" onclick="toggleEntry('${e.id}')">
+          <div class="stamp cat-${e.category}">${(e.category||'').slice(0,2)}</div>
+          <div class="entry-title">
+            <p class="name">${escapeHtml(e.name)}</p>
+            <p class="meta">${escapeHtml(e.county)} · ${escapeHtml(e.category)}</p>
+          </div>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="entry-body">
+          <div class="field">
+            <div class="field-label">地址 / 連結</div>
+            <div>${addressHtml}</div>
+          </div>
+          ${e.note ? `<div class="field"><div class="field-label">補充</div><div class="note">${escapeHtml(e.note)}</div></div>` : ''}
+          ${e.photo ? `<div class="field"><div class="field-label">照片</div><img src="${e.photo}"></div>` : ''}
+          <button class="del-btn" onclick="deleteEntry('${e.id}', event)">刪除這筆紀錄</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleEntry(id){
+  openEntryId = (openEntryId === id) ? null : id;
+  filterAndRender();
+}
+
+async function deleteEntry(id, evt){
+  evt.stopPropagation();
+  if(!confirm('確定要刪除這筆紀錄嗎？')) return;
+  try{
+    await entriesRef.child(id).remove();
+  }catch(err){
+    console.error(err);
+    alert('刪除失敗，請再試一次');
+  }
+}
+
+document.getElementById('filter-county').addEventListener('change', filterAndRender);
+document.getElementById('filter-category').addEventListener('change', filterAndRender);
+
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escapeAttr(s){ return escapeHtml(s); }
+
+populateCounties();
+</script>
+</body>
+</html>
