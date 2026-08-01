@@ -233,6 +233,17 @@
     border-color:var(--turmeric);
   }
   textarea{resize:vertical;min-height:70px;}
+  .radio-row{display:flex;gap:16px;padding:2px 0;}
+  .radio-opt{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:14px;
+    font-weight:400;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .radio-opt input{width:16px;height:16px;accent-color:var(--chili);}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .row2 > div label{margin-top:14px;}
   .row2 > div:first-child label{margin-top:14px;}
@@ -542,14 +553,29 @@
       <label for="f-name">美食店名</label>
       <input type="text" id="f-name" placeholder="例如：老王牛肉麵">
 
-      <label for="f-address">地址或地址連結</label>
-      <input type="text" id="f-address" placeholder="貼上地址，或 Google 地圖連結">
+      <label>訂位</label>
+      <div class="radio-row">
+        <label class="radio-opt"><input type="radio" name="f-reservation" value="要"> 要</label>
+        <label class="radio-opt"><input type="radio" name="f-reservation" value="不要" checked> 不要</label>
+      </div>
+
+      <label for="f-address">地址</label>
+      <input type="text" id="f-address" placeholder="例如：台中市南屯區永春東七路725號">
+
+      <label for="f-navlink">導航</label>
+      <input type="text" id="f-navlink" placeholder="貼上 Google/Apple 地圖連結">
 
       <label for="f-phone">聯絡電話</label>
       <input type="text" id="f-phone" placeholder="例如：02-1234-5678">
 
+      <label for="f-recommend">推薦</label>
+      <input type="text" id="f-recommend" placeholder="推薦菜色，也可貼連結">
+
+      <label for="f-introurl">介紹網址</label>
+      <input type="text" id="f-introurl" placeholder="部落格文章、IG 貼文等連結">
+
       <label for="f-note">補充說明</label>
-      <textarea id="f-note" placeholder="推薦菜色、心得、價位等..."></textarea>
+      <textarea id="f-note" placeholder="心得、價位等..."></textarea>
 
       <label>照片（可選，可選多張，例如菜單）</label>
       <label class="file-btn" for="f-photo">📷 選擇照片</label>
@@ -847,8 +873,12 @@ document.getElementById('submit-btn').addEventListener('click', async ()=>{
   const category = document.getElementById('f-category').value;
   const revisit = document.getElementById('f-revisit').value;
   const name = document.getElementById('f-name').value.trim();
+  const reservation = document.querySelector('input[name="f-reservation"]:checked').value;
   const address = document.getElementById('f-address').value.trim();
+  const navLink = document.getElementById('f-navlink').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
+  const recommend = document.getElementById('f-recommend').value.trim();
+  const introUrl = document.getElementById('f-introurl').value.trim();
   const note = document.getElementById('f-note').value.trim();
 
   if(!name){
@@ -862,16 +892,20 @@ document.getElementById('submit-btn').addEventListener('click', async ()=>{
 
   try{
     await entriesRef.push({
-      county, district, category, revisit, name, address, phone, note,
+      county, district, category, revisit, name, reservation, address, navLink, phone, recommend, introUrl, note,
       photos: pendingPhotos.length ? pendingPhotos : null,
       createdAt: firebase.database.ServerValue.TIMESTAMP
     });
 
     document.getElementById('f-name').value = '';
     document.getElementById('f-address').value = '';
+    document.getElementById('f-navlink').value = '';
     document.getElementById('f-phone').value = '';
+    document.getElementById('f-recommend').value = '';
+    document.getElementById('f-introurl').value = '';
     document.getElementById('f-note').value = '';
     document.getElementById('f-photo').value = '';
+    document.querySelector('input[name="f-reservation"][value="不要"]').checked = true;
     pendingPhotos = [];
     renderPhotoGrid('f-photo-grid', pendingPhotos);
 
@@ -928,14 +962,21 @@ function filterAndRender(){
     if(isEditing){
       bodyHtml = renderEditForm(e);
     }else{
-      const addressHtml = linkifyAddress(e.address);
+      const addressHtml = e.address ? escapeHtml(e.address) : '（未填寫）';
+      const navHtml = linkifyAddress(e.navLink);
       const phoneHtml = e.phone ? `<a href="tel:${escapeAttr(e.phone)}">${escapeHtml(e.phone)}</a>` : '';
+      const recommendHtml = linkifyAddress(e.recommend);
+      const introHtml = linkifyAddress(e.introUrl);
       bodyHtml = `
+        ${e.reservation ? `<div class="field"><div class="field-label">訂位</div><div>${e.reservation === '要' ? '✅ 要' : '⬜ 不要'}</div></div>` : ''}
         <div class="field">
-          <div class="field-label">地址 / 連結</div>
+          <div class="field-label">地址</div>
           <div>${addressHtml}</div>
         </div>
+        ${e.navLink ? `<div class="field"><div class="field-label">導航</div><div>${navHtml}</div></div>` : ''}
         ${phoneHtml ? `<div class="field"><div class="field-label">聯絡電話</div><div>${phoneHtml}</div></div>` : ''}
+        ${e.recommend ? `<div class="field"><div class="field-label">推薦</div><div>${recommendHtml}</div></div>` : ''}
+        ${e.introUrl ? `<div class="field"><div class="field-label">介紹網址</div><div>${introHtml}</div></div>` : ''}
         ${e.note ? `<div class="field"><div class="field-label">補充</div><div class="note">${escapeHtml(e.note)}</div></div>` : ''}
         ${photos.length ? `<div class="field"><div class="field-label">照片</div><div class="view-photo-grid">${photos.map(p=>`<img src="${p}" loading="lazy" onclick="window.open('${p}','_blank')">`).join('')}</div></div>` : ''}
         ${isLoggedIn() ? `
@@ -988,10 +1029,21 @@ function renderEditForm(e){
       <select class="ed-revisit">${revisitOpts}</select>
       <label>美食店名</label>
       <input type="text" class="ed-name" value="${escapeAttr(e.name||'')}">
-      <label>地址或地址連結</label>
+      <label>訂位</label>
+      <div class="radio-row">
+        <label class="radio-opt"><input type="radio" name="ed-reservation-${e.id}" class="ed-reservation" value="要" ${e.reservation==='要'?'checked':''}> 要</label>
+        <label class="radio-opt"><input type="radio" name="ed-reservation-${e.id}" class="ed-reservation" value="不要" ${e.reservation!=='要'?'checked':''}> 不要</label>
+      </div>
+      <label>地址</label>
       <input type="text" class="ed-address" value="${escapeAttr(e.address||'')}">
+      <label>導航</label>
+      <input type="text" class="ed-navlink" value="${escapeAttr(e.navLink||'')}">
       <label>聯絡電話</label>
       <input type="text" class="ed-phone" value="${escapeAttr(e.phone||'')}">
+      <label>推薦</label>
+      <input type="text" class="ed-recommend" value="${escapeAttr(e.recommend||'')}">
+      <label>介紹網址</label>
+      <input type="text" class="ed-introurl" value="${escapeAttr(e.introUrl||'')}">
       <label>補充說明</label>
       <textarea class="ed-note">${escapeHtml(e.note||'')}</textarea>
       <label>照片</label>
@@ -1100,8 +1152,13 @@ async function saveEdit(id, evt){
   const category = form.querySelector('.ed-category').value;
   const revisit = form.querySelector('.ed-revisit').value;
   const name = form.querySelector('.ed-name').value.trim();
+  const reservationEl = form.querySelector('.ed-reservation:checked');
+  const reservation = reservationEl ? reservationEl.value : '不要';
   const address = form.querySelector('.ed-address').value.trim();
+  const navLink = form.querySelector('.ed-navlink').value.trim();
   const phone = form.querySelector('.ed-phone').value.trim();
+  const recommend = form.querySelector('.ed-recommend').value.trim();
+  const introUrl = form.querySelector('.ed-introurl').value.trim();
   const note = form.querySelector('.ed-note').value.trim();
   const photos = form._getPhotos ? form._getPhotos() : [];
 
@@ -1112,7 +1169,7 @@ async function saveEdit(id, evt){
 
   try{
     await entriesRef.child(id).update({
-      county, district, category, revisit, name, address, phone, note,
+      county, district, category, revisit, name, reservation, address, navLink, phone, recommend, introUrl, note,
       photos: photos.length ? photos : null
     });
     editEntryId = null;
