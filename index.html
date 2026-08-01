@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>食記護照</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1F2A28">
@@ -459,6 +462,15 @@
   }
   .conn-dot.on{background:var(--sage);}
   .conn-tag{font-size:11px;color:rgba(251,246,236,0.45);text-align:right;margin-bottom:8px;}
+  .update-btn{
+    background:none;
+    border:none;
+    color:var(--turmeric);
+    font-size:11px;
+    cursor:pointer;
+    text-decoration:underline;
+    padding:0;
+  }
 </style>
 </head>
 <body>
@@ -482,7 +494,7 @@
     </div>
   </div>
 
-  <p class="conn-tag"><span class="conn-dot" id="conn-dot"></span><span id="conn-text">連線中...</span></p>
+  <p class="conn-tag"><span class="conn-dot" id="conn-dot"></span><span id="conn-text">連線中...</span> · <button id="update-btn" class="update-btn">🔄 檢查更新</button></p>
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="add">📝 登記</button>
@@ -1157,6 +1169,33 @@ function showToast(text){
 
 populateCounties();
 applyAuthState();
+
+// --- Service worker: keeps the home-screen app fetching the latest version ---
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(err=> console.error('SW 註冊失敗', err));
+  });
+}
+
+document.getElementById('update-btn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('update-btn');
+  btn.textContent = '更新中...';
+  try{
+    if('serviceWorker' in navigator){
+      const reg = await navigator.serviceWorker.getRegistration();
+      if(reg) await reg.update();
+    }
+  }catch(err){ console.error(err); }
+  // 強制重新整理，並加上時間戳記避開任何殘留快取
+  location.href = location.pathname + '?t=' + Date.now();
+});
+
+// 從背景切回 App 時，自動嘗試靜默更新 Service Worker（不會打斷使用者）
+document.addEventListener('visibilitychange', ()=>{
+  if(document.visibilityState === 'visible' && 'serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistration().then(reg=> reg && reg.update());
+  }
+});
 </script>
 </body>
 </html>
