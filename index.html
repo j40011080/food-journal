@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>食記護照</title>
-
-<!-- App Icon（美食主題） -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMUYyQTI4Ii8+CiAgPHBhdGggZD0iTTUwIDIwYy0yIDAtNCA4LTQgMTRzMiA0IDIgOC0zIDQtMyA4aDEwYzAtNC0zLTQtMy04czItMiAyLTgtMi0xNC00LTE0eiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTYyIDIyYy0xLjUgMC0zIDctMyAxMnMxLjUgMy41IDEuNSA3LTIuNSAzLjUtMi41IDdoOGMwLTMuNS0yLjUtMy41LTIuNS03czEuNS0yIDEuNS03LTEuNS0xMi0zLTEyeiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIyOCIgcnk9IjEwIiBmaWxsPSIjRkJGNkVDIi8+CiAgPHBhdGggZD0iTTIyIDYyYzAgMTIgMTIuNSAyMCAyOCAyMHMyOC04IDI4LTIweiIgZmlsbD0iI0MxNTAyRSIvPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMjgiIHJ5PSI5IiBmaWxsPSIjRkJGNkVDIi8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjIiIHJ4PSIyMiIgcnk9IjYiIGZpbGw9IiM2QjhGNzEiIG9wYWNpdHk9IjAuODUiLz4KICA8bGluZSB4MT0iNjYiIHkxPSI0OCIgeDI9Ijc2IiB5Mj0iMzAiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNzEiIHkxPSI1MCIgeDI9IjgxIiB5Mj0iMzIiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMUYyQTI4Ii8+CiAgPHBhdGggZD0iTTUwIDIwYy0yIDAtNCA4LTQgMTRzMiA0IDIgOC0zIDQtMyA4aDEwYzAtNC0zLTQtMy04czItMiAyLTgtMi0xNC00LTE0eiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTYyIDIyYy0xLjUgMC0zIDctMyAxMnMxLjUgMy41IDEuNSA3LTIuNSAzLjUtMi41IDdoOGMwLTMuNS0yLjUtMy41LTIuNS03czEuNS0yIDEuNS03LTEuNS0xMi0zLTEyeiIgZmlsbD0iI0Q5QTAyRCIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIyOCIgcnk9IjEwIiBmaWxsPSIjRkJGNkVDIi8+CiAgPHBhdGggZD0iTTIyIDYyYzAgMTIgMTIuNSAyMCAyOCAyMHMyOC04IDI4LTIweiIgZmlsbD0iI0MxNTAyRSIvPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMjgiIHJ5PSI5IiBmaWxsPSIjRkJGNkVDIi8+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjIiIHJ4PSIyMiIgcnk9IjYiIGZpbGw9IiM2QjhGNzEiIG9wYWNpdHk9IjAuODUiLz4KICA8bGluZSB4MT0iNjYiIHkxPSI0OCIgeDI9Ijc2IiB5Mj0iMzAiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNzEiIHkxPSI1MCIgeDI9IjgxIiB5Mj0iMzIiIHN0cm9rZT0iI0ZCRjZFQyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1F2A28">
-
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="食記護照">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -40,15 +42,89 @@
     padding:22px 4px 26px;
     border-bottom:1px solid var(--line);
     margin-bottom:18px;
+    position:relative;
+  }
+  .login-btn{
+    position:absolute;
+    top:22px;
+    right:4px;
+    background:transparent;
+    border:1.5px solid var(--line);
+    color:rgba(251,246,236,0.75);
+    font-size:12px;
+    padding:7px 11px;
+    border-radius:20px;
+    cursor:pointer;
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:5px;
   }
-  header.hero .icon{
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    flex-shrink:0;
+  .login-btn.logged-in{
+    border-color:var(--sage);
+    color:var(--sage);
+  }
+  .modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:50;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:14px;
+    padding:24px;
+    max-width:320px;
+    width:100%;
+  }
+  .modal-box h3{
+    font-family:'Noto Serif TC',serif;
+    margin:0 0 14px;
+    font-size:18px;
+  }
+  .modal-box input{margin-bottom:6px;}
+  .modal-err{font-size:12px;color:var(--chili);display:none;margin-bottom:8px;}
+  .modal-actions{display:flex;gap:8px;margin-top:14px;}
+  .modal-actions button{
+    flex:1;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .modal-confirm{background:var(--chili);color:#fff;}
+  .modal-cancel{background:var(--paper-dim);color:var(--ink-2);}
+  .locked-notice{
+    text-align:center;
+    padding:36px 20px;
+    color:var(--ink-2);
+  }
+  .locked-notice .icon{font-size:32px;margin-bottom:10px;}
+  .locked-notice p{font-size:13.5px;line-height:1.7;color:#6B6250;margin:6px 0 16px;}
+  .locked-notice button{
+    background:var(--chili);
+    color:#fff;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:13.5px;
+  }
+  .view-only-tag{
+    font-size:11px;
+    color:var(--turmeric);
+    background:rgba(217,160,45,0.12);
+    padding:2px 8px;
+    border-radius:10px;
+    margin-left:6px;
   }
   .eyebrow{
     font-size:12px;
@@ -71,7 +147,6 @@
     margin:0;
   }
 
-  /* Tabs styled like passport stamps */
   .tabs{
     display:flex;
     gap:8px;
@@ -138,6 +213,8 @@
   }
   textarea{resize:vertical;min-height:70px;}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .row2 > div label{margin-top:14px;}
+  .row2 > div:first-child label{margin-top:14px;}
 
   .file-btn{
     display:inline-flex;
@@ -152,12 +229,39 @@
     cursor:pointer;
     color:var(--ink-2);
   }
-  .photo-preview{
+  .photo-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
     margin-top:10px;
-    max-width:160px;
+  }
+  .photo-thumb{
+    position:relative;
+    width:76px;
+    height:76px;
     border-radius:8px;
-    display:none;
+    overflow:hidden;
     border:1px solid #DCD3BC;
+  }
+  .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-thumb .rm{
+    position:absolute;
+    top:2px;right:2px;
+    width:19px;height:19px;
+    background:rgba(30,20,10,0.75);
+    color:#fff;
+    border:none;
+    border-radius:50%;
+    font-size:12px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .upload-status{
+    font-size:12px;
+    color:var(--sage);
+    margin-top:6px;
+    display:none;
   }
 
   .submit-btn{
@@ -174,8 +278,8 @@
     cursor:pointer;
     letter-spacing:0.03em;
   }
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
   .submit-btn:active{transform:scale(0.99);}
-  .submit-btn:disabled{opacity:0.6;cursor:default;}
   .status-msg{
     font-size:13px;
     margin-top:10px;
@@ -183,13 +287,13 @@
     display:none;
   }
 
-  /* Browse tab */
   .filter-bar{
     display:flex;
     gap:10px;
-    margin-bottom:16px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
   }
-  .filter-bar select{flex:1;}
+  .filter-bar select{flex:1;min-width:110px;}
 
   .entry{
     background:var(--paper);
@@ -207,15 +311,15 @@
   }
   .stamp{
     flex-shrink:0;
-    width:38px;
-    height:38px;
+    width:46px;
+    height:46px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     font-family:'Noto Serif TC',serif;
     font-weight:700;
-    font-size:13px;
+    font-size:16px;
     color:#fff;
   }
   .cat-西式{background:var(--chili);}
@@ -233,7 +337,7 @@
     margin:0;
   }
   .entry-title .meta{
-    font-size:12px;
+    font-size:12.5px;
     color:#6B6250;
     margin:2px 0 0;
   }
@@ -260,22 +364,51 @@
   }
   .entry-body a{color:var(--chili);word-break:break-all;}
   .entry-body .note{font-size:13.5px;line-height:1.6;color:var(--ink-2);}
-  .entry-body img{
-    max-width:100%;
+  .view-photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .view-photo-grid img{
+    width:104px;height:104px;
+    object-fit:cover;
     border-radius:8px;
-    margin-top:6px;
-    display:block;
+    cursor:pointer;
+  }
+
+  .action-row{
+    display:flex;
+    gap:8px;
+    margin-top:16px;
+  }
+  .edit-btn, .del-btn{
+    flex:1;
+    padding:9px 10px;
+    border-radius:7px;
+    font-size:13px;
+    cursor:pointer;
+    font-weight:500;
+  }
+  .edit-btn{
+    background:var(--paper-dim);
+    border:1px solid #C9BB99;
+    color:var(--ink-2);
   }
   .del-btn{
-    margin-top:14px;
     background:none;
     border:1px solid #D9C7C7;
     color:var(--chili);
-    font-size:12px;
-    padding:6px 12px;
-    border-radius:6px;
-    cursor:pointer;
   }
+
+  .edit-form label{margin-top:12px;}
+  .edit-actions{display:flex;gap:8px;margin-top:16px;}
+  .edit-actions button{
+    flex:1;
+    padding:10px;
+    border-radius:7px;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+    border:none;
+  }
+  .save-edit-btn{background:var(--sage);color:#fff;}
+  .cancel-edit-btn{background:var(--paper-dim);color:var(--ink-2);border:1px solid #C9BB99 !important;}
 
   .empty{
     text-align:center;
@@ -290,39 +423,57 @@
     color:rgba(251,246,236,0.5);
     margin-bottom:10px;
   }
+  .conn-dot{
+    display:inline-block;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:#888;
+    margin-right:5px;
+  }
+  .conn-dot.on{background:var(--sage);}
+  .conn-tag{font-size:11px;color:rgba(251,246,236,0.45);text-align:right;margin-bottom:8px;}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="hero">
-    <svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100" height="100" rx="20" fill="#1F2A28"/>
-      <path d="M50 20c-2 0-4 8-4 14s2 4 2 8-3 4-3 8h10c0-4-3-4-3-8s2-2 2-8-2-14-4-14z" fill="#D9A02D" opacity="0.9"/>
-      <path d="M62 22c-1.5 0-3 7-3 12s1.5 3.5 1.5 7-2.5 3.5-2.5 7h8c0-3.5-2.5-3.5-2.5-7s1.5-2 1.5-7-1.5-12-3-12z" fill="#D9A02D" opacity="0.7"/>
-      <ellipse cx="50" cy="66" rx="28" ry="10" fill="#FBF6EC"/>
-      <path d="M22 62c0 12 12.5 20 28 20s28-8 28-20z" fill="#C1502E"/>
-      <ellipse cx="50" cy="62" rx="28" ry="9" fill="#FBF6EC"/>
-      <ellipse cx="50" cy="62" rx="22" ry="6" fill="#6B8F71" opacity="0.85"/>
-      <line x1="66" y1="48" x2="76" y2="30" stroke="#FBF6EC" stroke-width="3" stroke-linecap="round"/>
-      <line x1="71" y1="50" x2="81" y2="32" stroke="#FBF6EC" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-    <div>
-      <p class="eyebrow">美食共享手帳</p>
-      <h1 style="margin-bottom:0;">食記護照</h1>
-    </div>
+    <button class="login-btn" id="login-btn">🔒 登入</button>
+    <p class="eyebrow">美食共享手帳</p>
+    <h1>食記護照</h1>
+    <p class="sub">共同紀錄（同步更新），兩人共用同一份美食清單。</p>
   </header>
-  <p class="sub" style="margin:-8px 0 18px;">登記你們吃過的每一家店，兩人共用同一份紀錄（Firebase 即時同步）。</p>
+
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-box">
+      <h3 id="login-modal-title">🔒 輸入密碼</h3>
+      <input type="password" id="login-pw-input" placeholder="密碼">
+      <p class="modal-err" id="login-err">密碼不正確，請再試一次</p>
+      <div class="modal-actions">
+        <button class="modal-confirm" id="login-confirm-btn">登入</button>
+        <button class="modal-cancel" id="login-cancel-btn">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="conn-tag"><span class="conn-dot" id="conn-dot"></span><span id="conn-text">連線中...</span></p>
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="add">📝 登記</button>
     <button class="tab-btn" data-tab="browse">📖 閱覽</button>
   </div>
 
-  <!-- 登記頁 -->
   <div class="panel active" id="panel-add">
-    <div class="card">
-      <label for="f-county">縣市</label>
-      <select id="f-county"></select>
+    <div class="card" id="add-form-card">
+      <div class="row2">
+        <div>
+          <label for="f-county">縣市</label>
+          <select id="f-county"></select>
+        </div>
+        <div>
+          <label for="f-district">鄉鎮區</label>
+          <select id="f-district"><option value="">請選擇</option></select>
+        </div>
+      </div>
 
       <label for="f-category">分類</label>
       <select id="f-category">
@@ -334,29 +485,44 @@
         <option value="其他">其他</option>
       </select>
 
+      <label for="f-revisit">回訪意願</label>
+      <select id="f-revisit">
+        <option value="😋想回訪">😋想回訪</option>
+        <option value="🤔想嘗試">🤔想嘗試</option>
+      </select>
+
       <label for="f-name">美食店名</label>
       <input type="text" id="f-name" placeholder="例如：老王牛肉麵">
 
       <label for="f-address">地址或地址連結</label>
       <input type="text" id="f-address" placeholder="貼上地址，或 Google 地圖連結">
 
+      <label for="f-phone">聯絡電話</label>
+      <input type="text" id="f-phone" placeholder="例如：02-1234-5678">
+
       <label for="f-note">補充說明</label>
       <textarea id="f-note" placeholder="推薦菜色、心得、價位等..."></textarea>
 
-      <label>照片（可選）</label>
+      <label>照片（可選，可選多張，例如菜單）</label>
       <label class="file-btn" for="f-photo">📷 選擇照片</label>
-      <input type="file" id="f-photo" accept="image/*" style="display:none">
-      <img id="f-photo-preview" class="photo-preview">
+      <input type="file" id="f-photo" accept="image/*" multiple style="display:none">
+      <div class="photo-grid" id="f-photo-grid"></div>
+      <p class="upload-status" id="upload-status">上傳中...</p>
 
       <button class="submit-btn" id="submit-btn">儲存這筆紀錄</button>
       <p class="status-msg" id="status-msg">✓ 已儲存！</p>
     </div>
+    <div class="card locked-notice" id="add-locked-notice" style="display:none;">
+      <div class="icon">🔒</div>
+      <p>目前是瀏覽模式，登入後才能新增紀錄。</p>
+      <button id="locked-login-btn">輸入密碼登入</button>
+    </div>
   </div>
 
-  <!-- 閱覽頁 -->
   <div class="panel" id="panel-browse">
     <div class="filter-bar">
       <select id="filter-county"><option value="">全部縣市</option></select>
+      <select id="filter-district"><option value="">全部鄉鎮區</option></select>
       <select id="filter-category">
         <option value="">全部分類</option>
         <option value="西式">西式</option>
@@ -366,35 +532,130 @@
         <option value="越式">越式</option>
         <option value="其他">其他</option>
       </select>
+      <select id="filter-revisit">
+        <option value="">全部回訪意願</option>
+        <option value="😋想回訪">😋想回訪</option>
+        <option value="🤔想嘗試">🤔想嘗試</option>
+      </select>
     </div>
     <p class="count-tag" id="count-tag"></p>
     <div id="entry-list"><div class="loading">讀取中...</div></div>
   </div>
 </div>
 
-<!-- Firebase SDK (compat) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
 <script>
-// --- Firebase 設定 ---
 const firebaseConfig = {
-    apiKey: "AIzaSyCu6QUhZnaM0xrc-ai9DfKbRifURGZiJr0",
-    authDomain: "food-journal-12172.firebaseapp.com",
-    databaseURL: "https://food-journal-12172-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "food-journal-12172",
-    storageBucket: "food-journal-12172.firebasestorage.app",
-    messagingSenderId: "123228780699",
-    appId: "1:123228780699:web:56b0961043128de8b9ae3e"
+  apiKey: "AIzaSyCu6QUhZnaM0xrc-ai9DfKbRifURGZiJr0",
+  authDomain: "food-journal-12172.firebaseapp.com",
+  databaseURL: "https://food-journal-12172-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "food-journal-12172",
+  storageBucket: "food-journal-12172.firebasestorage.app",
+  messagingSenderId: "123228780699",
+  appId: "1:123228780699:web:56b0961043128de8b9ae3e"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+const storage = firebase.storage();
 const entriesRef = db.ref('entries');
 
-const COUNTIES = ["台北市","新北市","桃園市","台中市","台南市","高雄市","基隆市","新竹市","新竹縣","苗栗縣","彰化縣","南投縣","雲林縣","嘉義市","嘉義縣","屏東縣","宜蘭縣","花蓮縣","台東縣","澎湖縣","金門縣","連江縣"];
-let entries = [];
+const CATEGORIES = ["西式","中式","韓式","泰式","越式","其他"];
+
+const COUNTY_DISTRICTS = {
+  "台北市": ["中正區","大同區","中山區","松山區","大安區","萬華區","信義區","士林區","北投區","內湖區","南港區","文山區"],
+  "新北市": ["板橋區","三重區","中和區","永和區","新莊區","新店區","樹林區","鶯歌區","三峽區","淡水區","汐止區","瑞芳區","土城區","蘆洲區","五股區","泰山區","林口區","深坑區","石碇區","坪林區","三芝區","石門區","八里區","平溪區","雙溪區","貢寮區","金山區","萬里區","烏來區"],
+  "桃園市": ["桃園區","中壢區","大溪區","楊梅區","蘆竹區","大園區","龜山區","八德區","龍潭區","平鎮區","新屋區","觀音區","復興區"],
+  "台中市": ["中區","東區","南區","西區","北區","北屯區","西屯區","南屯區","太平區","大里區","霧峰區","烏日區","豐原區","后里區","石岡區","東勢區","和平區","新社區","潭子區","大雅區","神岡區","大肚區","沙鹿區","龍井區","梧棲區","清水區","大甲區","外埔區","大安區"],
+  "台南市": ["中西區","東區","南區","北區","安平區","安南區","永康區","歸仁區","新化區","左鎮區","玉井區","楠西區","南化區","仁德區","關廟區","龍崎區","官田區","麻豆區","佳里區","西港區","七股區","將軍區","學甲區","北門區","新營區","後壁區","白河區","東山區","六甲區","下營區","柳營區","鹽水區","善化區","大內區","山上區","新市區","安定區"],
+  "高雄市": ["新興區","前金區","苓雅區","鹽埕區","鼓山區","旗津區","前鎮區","三民區","左營區","楠梓區","小港區","鳳山區","林園區","大寮區","大樹區","大社區","仁武區","鳥松區","岡山區","橋頭區","燕巢區","田寮區","阿蓮區","路竹區","湖內區","茄萣區","永安區","彌陀區","梓官區","旗山區","美濃區","六龜區","甲仙區","杉林區","內門區","茂林區","桃源區","那瑪夏區"],
+  "基隆市": ["仁愛區","信義區","中正區","中山區","安樂區","暖暖區","七堵區"],
+  "新竹市": ["東區","北區","香山區"],
+  "新竹縣": ["竹北市","竹東鎮","新埔鎮","關西鎮","湖口鄉","新豐鄉","芎林鄉","橫山鄉","北埔鄉","寶山鄉","峨眉鄉","尖石鄉","五峰鄉"],
+  "苗栗縣": ["苗栗市","苑裡鎮","通霄鎮","竹南鎮","頭份市","後龍鎮","卓蘭鎮","大湖鄉","公館鄉","銅鑼鄉","南庄鄉","頭屋鄉","三義鄉","西湖鄉","造橋鄉","三灣鄉","獅潭鄉","泰安鄉"],
+  "彰化縣": ["彰化市","鹿港鎮","和美鎮","線西鄉","伸港鄉","福興鄉","秀水鄉","花壇鄉","芬園鄉","員林市","溪湖鎮","田中鎮","大村鄉","埔鹽鄉","埔心鄉","永靖鄉","社頭鄉","二水鄉","北斗鎮","二林鎮","田尾鄉","埤頭鄉","芳苑鄉","大城鄉","竹塘鄉","溪州鄉"],
+  "南投縣": ["南投市","埔里鎮","草屯鎮","竹山鎮","集集鎮","名間鄉","鹿谷鄉","中寮鄉","魚池鄉","國姓鄉","水里鄉","信義鄉","仁愛鄉"],
+  "雲林縣": ["斗六市","斗南鎮","虎尾鎮","西螺鎮","土庫鎮","北港鎮","古坑鄉","大埤鄉","莿桐鄉","林內鄉","二崙鄉","崙背鄉","麥寮鄉","東勢鄉","褒忠鄉","台西鄉","元長鄉","四湖鄉","口湖鄉","水林鄉"],
+  "嘉義市": ["東區","西區"],
+  "嘉義縣": ["太保市","朴子市","布袋鎮","大林鎮","民雄鄉","溪口鄉","新港鄉","六腳鄉","東石鄉","義竹鄉","鹿草鄉","水上鄉","中埔鄉","竹崎鄉","梅山鄉","番路鄉","大埔鄉","阿里山鄉"],
+  "屏東縣": ["屏東市","潮州鎮","東港鎮","恆春鎮","萬丹鄉","長治鄉","麟洛鄉","九如鄉","里港鄉","鹽埔鄉","高樹鄉","萬巒鄉","內埔鄉","竹田鄉","新埤鄉","枋寮鄉","新園鄉","崁頂鄉","林邊鄉","南州鄉","佳冬鄉","琉球鄉","車城鄉","滿州鄉","枋山鄉","三地門鄉","霧台鄉","瑪家鄉","泰武鄉","來義鄉","春日鄉","獅子鄉","牡丹鄉"],
+  "宜蘭縣": ["宜蘭市","羅東鎮","蘇澳鎮","頭城鎮","礁溪鄉","壯圍鄉","員山鄉","冬山鄉","五結鄉","三星鄉","大同鄉","南澳鄉"],
+  "花蓮縣": ["花蓮市","鳳林鎮","玉里鎮","新城鄉","吉安鄉","壽豐鄉","光復鄉","豐濱鄉","瑞穗鄉","富里鄉","秀林鄉","萬榮鄉","卓溪鄉"],
+  "台東縣": ["台東市","成功鎮","關山鎮","卑南鄉","大武鄉","太麻里鄉","東河鄉","長濱鄉","鹿野鄉","池上鄉","綠島鄉","蘭嶼鄉","延平鄉","海端鄉","達仁鄉","金峰鄉"],
+  "澎湖縣": ["馬公市","湖西鄉","白沙鄉","西嶼鄉","望安鄉","七美鄉"],
+  "金門縣": ["金城鎮","金湖鎮","金沙鎮","金寧鄉","烈嶼鄉","烏坵鄉"],
+  "連江縣": ["南竿鄉","北竿鄉","莒光鄉","東引鄉"]
+};
+const COUNTIES = Object.keys(COUNTY_DISTRICTS);
+
+let entries = {};
 let openEntryId = null;
-let pendingPhoto = null;
+let editEntryId = null;
+let pendingPhotos = []; // urls collected before saving new entry
+
+// --- Auth (client-side gate; convenience, not real security) ---
+const PASSWORD_HASH = "7d608decaea5ec08bd4141d4d81c51ee8703223bf27bb89239d7e6d9c92493ef";
+const AUTH_KEY = 'food-journal-auth';
+
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function isLoggedIn(){
+  return localStorage.getItem(AUTH_KEY) === PASSWORD_HASH;
+}
+
+function applyAuthState(){
+  const loggedIn = isLoggedIn();
+  const btn = document.getElementById('login-btn');
+  btn.textContent = loggedIn ? '🔓 已登入' : '🔒 登入';
+  btn.classList.toggle('logged-in', loggedIn);
+
+  document.getElementById('add-form-card').style.display = loggedIn ? 'block' : 'none';
+  document.getElementById('add-locked-notice').style.display = loggedIn ? 'none' : 'block';
+
+  filterAndRender();
+}
+
+function openLoginModal(){
+  document.getElementById('login-modal').classList.add('show');
+  document.getElementById('login-err').style.display = 'none';
+  document.getElementById('login-pw-input').value = '';
+  document.getElementById('login-pw-input').focus();
+}
+function closeLoginModal(){
+  document.getElementById('login-modal').classList.remove('show');
+}
+
+document.getElementById('login-btn').addEventListener('click', ()=>{
+  if(isLoggedIn()){
+    if(confirm('要登出嗎？登出後將無法新增／編輯／刪除紀錄。')){
+      localStorage.removeItem(AUTH_KEY);
+      applyAuthState();
+    }
+  }else{
+    openLoginModal();
+  }
+});
+document.getElementById('locked-login-btn').addEventListener('click', openLoginModal);
+document.getElementById('login-cancel-btn').addEventListener('click', closeLoginModal);
+document.getElementById('login-confirm-btn').addEventListener('click', async ()=>{
+  const pw = document.getElementById('login-pw-input').value;
+  const hash = await sha256(pw);
+  if(hash === PASSWORD_HASH){
+    localStorage.setItem(AUTH_KEY, hash);
+    closeLoginModal();
+    applyAuthState();
+  }else{
+    document.getElementById('login-err').style.display = 'block';
+  }
+});
+document.getElementById('login-pw-input').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') document.getElementById('login-confirm-btn').click();
+});
 
 function populateCounties(){
   const addSel = document.getElementById('f-county');
@@ -403,7 +664,37 @@ function populateCounties(){
     addSel.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
     filterSel.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
   });
+  fillDistricts('f-county', 'f-district', false);
+  fillDistricts('filter-county', 'filter-district', true);
 }
+
+function fillDistricts(countySelId, districtSelId, isFilter){
+  const county = document.getElementById(countySelId).value;
+  const districtSel = document.getElementById(districtSelId);
+  const list = COUNTY_DISTRICTS[county] || [];
+  districtSel.innerHTML = isFilter
+    ? '<option value="">全部鄉鎮區</option>'
+    : '<option value="">請選擇</option>';
+  list.forEach(d=>{
+    districtSel.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
+  });
+}
+
+document.getElementById('f-county').addEventListener('change', ()=> fillDistricts('f-county','f-district', false));
+document.getElementById('filter-county').addEventListener('change', ()=>{ fillDistricts('filter-county','filter-district', true); filterAndRender(); });
+
+// --- Connection status ---
+db.ref('.info/connected').on('value', (snap)=>{
+  const dot = document.getElementById('conn-dot');
+  const text = document.getElementById('conn-text');
+  if(snap.val() === true){
+    dot.classList.add('on');
+    text.textContent = '已連線';
+  }else{
+    dot.classList.remove('on');
+    text.textContent = '連線中...';
+  }
+});
 
 // --- Tabs ---
 document.querySelectorAll('.tab-btn').forEach(btn=>{
@@ -412,41 +703,93 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
-    if(btn.dataset.tab === 'browse') filterAndRender();
   });
 });
 
-// --- Photo upload with compression ---
-document.getElementById('f-photo').addEventListener('change', (e)=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev)=>{
-    const img = new Image();
-    img.onload = ()=>{
-      const maxW = 700;
-      const scale = Math.min(1, maxW / img.width);
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width * scale;
-      canvas.height = img.height * scale;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      pendingPhoto = canvas.toDataURL('image/jpeg', 0.65);
-      const preview = document.getElementById('f-photo-preview');
-      preview.src = pendingPhoto;
-      preview.style.display = 'block';
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+// --- Photo upload (multiple) ---
+document.getElementById('f-photo').addEventListener('change', async (e)=>{
+  const files = Array.from(e.target.files || []);
+  if(!files.length) return;
+  const statusEl = document.getElementById('upload-status');
+  statusEl.style.display = 'block';
+
+  for(let i=0;i<files.length;i++){
+    statusEl.textContent = `上傳中... (${i+1}/${files.length})`;
+    try{
+      const url = await uploadOnePhoto(files[i]);
+      pendingPhotos.push(url);
+      redrawAddPhotos();
+    }catch(err){
+      console.error(err);
+      alert('有一張照片上傳失敗，請再試一次');
+    }
+  }
+  statusEl.textContent = '✓ 上傳完成';
+  setTimeout(()=>{ statusEl.style.display='none'; }, 1500);
+  e.target.value = '';
 });
 
-// --- Save entry ---
+async function uploadOnePhoto(file){
+  const compressed = await compressImage(file, 900, 0.7);
+  const path = `photos/${Date.now()}_${Math.random().toString(36).slice(2,8)}.jpg`;
+  const ref = storage.ref(path);
+  await ref.put(compressed);
+  return await ref.getDownloadURL();
+}
+
+function compressImage(file, maxW, quality){
+  return new Promise((resolve)=>{
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const scale = Math.min(1, maxW / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(resolve, 'image/jpeg', quality);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function redrawAddPhotos(){
+  renderPhotoGrid('f-photo-grid', pendingPhotos, (idx)=>{
+    pendingPhotos.splice(idx,1);
+    redrawAddPhotos();
+  });
+}
+
+function renderPhotoGrid(containerId, urls, onRemove){
+  const el = document.getElementById(containerId);
+  el.innerHTML = urls.map((u, idx)=>`
+    <div class="photo-thumb">
+      <img src="${u}">
+      ${onRemove ? `<button class="rm" data-idx="${idx}">✕</button>` : ''}
+    </div>
+  `).join('');
+  if(onRemove){
+    el.querySelectorAll('.rm').forEach(btn=>{
+      btn.addEventListener('click', ()=> onRemove(parseInt(btn.dataset.idx)));
+    });
+  }
+}
+
+// --- Save new entry ---
 document.getElementById('submit-btn').addEventListener('click', async ()=>{
+  if(!isLoggedIn()){ openLoginModal(); return; }
+
   const county = document.getElementById('f-county').value;
+  const district = document.getElementById('f-district').value;
   const category = document.getElementById('f-category').value;
+  const revisit = document.getElementById('f-revisit').value;
   const name = document.getElementById('f-name').value.trim();
   const address = document.getElementById('f-address').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
   const note = document.getElementById('f-note').value.trim();
 
   if(!name){
@@ -459,109 +802,281 @@ document.getElementById('submit-btn').addEventListener('click', async ()=>{
   btn.textContent = '儲存中...';
 
   try{
-    const newEntry = {
-      county, category, name, address, note,
-      photo: pendingPhoto || null,
-      createdAt: new Date().toISOString()
-    };
-    await entriesRef.push(newEntry);
+    await entriesRef.push({
+      county, district, category, revisit, name, address, phone, note,
+      photos: pendingPhotos.length ? pendingPhotos : null,
+      createdAt: firebase.database.ServerValue.TIMESTAMP
+    });
 
-    // reset form
     document.getElementById('f-name').value = '';
     document.getElementById('f-address').value = '';
+    document.getElementById('f-phone').value = '';
     document.getElementById('f-note').value = '';
     document.getElementById('f-photo').value = '';
-    document.getElementById('f-photo-preview').style.display = 'none';
-    pendingPhoto = null;
+    pendingPhotos = [];
+    renderPhotoGrid('f-photo-grid', pendingPhotos);
 
     const msg = document.getElementById('status-msg');
     msg.style.display = 'block';
     setTimeout(()=>{ msg.style.display = 'none'; }, 2200);
   }catch(err){
     console.error(err);
-    alert('儲存失敗，請再試一次：' + (err && err.message ? err.message : ''));
+    alert('儲存失敗，請再試一次：' + err.message);
   }finally{
     btn.disabled = false;
     btn.textContent = '儲存這筆紀錄';
   }
 });
 
-// --- Realtime sync from Firebase ---
-entriesRef.on('value', (snapshot)=>{
-  const val = snapshot.val() || {};
-  entries = Object.keys(val).map(id => ({ id, ...val[id] }))
-    .sort((a,b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+// --- Live sync ---
+entriesRef.on('value', (snap)=>{
+  entries = snap.val() || {};
   filterAndRender();
-}, (err)=>{
-  console.error(err);
-  document.getElementById('entry-list').innerHTML =
-    '<div class="empty">讀取失敗，請檢查 Firebase 設定與資料庫規則</div>';
 });
 
-// --- Render browse list ---
+function getPhotos(e){
+  if(e.photos && Array.isArray(e.photos)) return e.photos;
+  if(e.photo) return [e.photo];
+  return [];
+}
+
 function filterAndRender(){
   const fc = document.getElementById('filter-county').value;
+  const fd = document.getElementById('filter-district').value;
   const fcat = document.getElementById('filter-category').value;
-  const filtered = entries.filter(e=>
-    (!fc || e.county === fc) && (!fcat || e.category === fcat)
-  );
+  const frev = document.getElementById('filter-revisit').value;
 
-  document.getElementById('count-tag').textContent = `共 ${filtered.length} 筆紀錄`;
+  const list = Object.entries(entries)
+    .map(([id, e])=>({id, ...e}))
+    .filter(e=> (!fc || e.county === fc) && (!fd || e.district === fd) && (!fcat || e.category === fcat) && (!frev || e.revisit === frev))
+    .sort((a,b)=> (b.createdAt||0) - (a.createdAt||0));
+
+  document.getElementById('count-tag').textContent = `共 ${list.length} 筆紀錄`;
 
   const listEl = document.getElementById('entry-list');
-  if(filtered.length === 0){
+  if(list.length === 0){
     listEl.innerHTML = '<div class="empty">目前沒有符合條件的紀錄<br>去「登記」分頁新增第一筆吧 🍜</div>';
     return;
   }
 
-  listEl.innerHTML = filtered.map(e=>{
+  listEl.innerHTML = list.map(e=>{
     const isOpen = e.id === openEntryId;
-    const isLink = /^https?:\/\//i.test(e.address || '');
-    const addressHtml = e.address
-      ? (isLink ? `<a href="${escapeAttr(e.address)}" target="_blank" rel="noopener">${escapeHtml(e.address)}</a>` : escapeHtml(e.address))
-      : '（未填寫）';
+    const isEditing = e.id === editEntryId;
+    const photos = getPhotos(e);
+
+    let bodyHtml;
+    if(isEditing){
+      bodyHtml = renderEditForm(e);
+    }else{
+      const isLink = /^https?:\/\//i.test(e.address || '');
+      const addressHtml = e.address
+        ? (isLink ? `<a href="${escapeAttr(e.address)}" target="_blank" rel="noopener">${escapeHtml(e.address)}</a>` : escapeHtml(e.address))
+        : '（未填寫）';
+      const phoneHtml = e.phone ? `<a href="tel:${escapeAttr(e.phone)}">${escapeHtml(e.phone)}</a>` : '';
+      bodyHtml = `
+        <div class="field">
+          <div class="field-label">地址 / 連結</div>
+          <div>${addressHtml}</div>
+        </div>
+        ${phoneHtml ? `<div class="field"><div class="field-label">聯絡電話</div><div>${phoneHtml}</div></div>` : ''}
+        ${e.note ? `<div class="field"><div class="field-label">補充</div><div class="note">${escapeHtml(e.note)}</div></div>` : ''}
+        ${photos.length ? `<div class="field"><div class="field-label">照片</div><div class="view-photo-grid">${photos.map(p=>`<img src="${p}" loading="lazy" onclick="window.open('${p}','_blank')">`).join('')}</div></div>` : ''}
+        ${isLoggedIn() ? `
+        <div class="action-row">
+          <button class="edit-btn" onclick="startEdit('${e.id}', event)">✏️ 編輯</button>
+          <button class="del-btn" onclick="deleteEntry('${e.id}', event)">🗑 刪除</button>
+        </div>` : ''}
+      `;
+    }
+
     return `
       <div class="entry ${isOpen?'open':''}" data-id="${e.id}">
         <div class="entry-head" onclick="toggleEntry('${e.id}')">
           <div class="stamp cat-${e.category}">${(e.category||'').slice(0,2)}</div>
           <div class="entry-title">
             <p class="name">${escapeHtml(e.name)}</p>
-            <p class="meta">${escapeHtml(e.county)} · ${escapeHtml(e.category)}</p>
+            <p class="meta">${escapeHtml(e.county||'')}${e.district ? '·'+escapeHtml(e.district) : ''} · ${escapeHtml(e.category||'')}${e.revisit ? ' · '+escapeHtml(e.revisit) : ''}</p>
           </div>
           <span class="chevron">▶</span>
         </div>
-        <div class="entry-body">
-          <div class="field">
-            <div class="field-label">地址 / 連結</div>
-            <div>${addressHtml}</div>
-          </div>
-          ${e.note ? `<div class="field"><div class="field-label">補充</div><div class="note">${escapeHtml(e.note)}</div></div>` : ''}
-          ${e.photo ? `<div class="field"><div class="field-label">照片</div><img src="${e.photo}"></div>` : ''}
-          <button class="del-btn" onclick="deleteEntry('${e.id}', event)">刪除這筆紀錄</button>
-        </div>
+        <div class="entry-body">${bodyHtml}</div>
       </div>
     `;
   }).join('');
 }
 
+function renderEditForm(e){
+  const photos = getPhotos(e);
+  const countyOpts = COUNTIES.map(c=>`<option value="${c}" ${c===e.county?'selected':''}>${c}</option>`).join('');
+  const districtList = COUNTY_DISTRICTS[e.county] || [];
+  const districtOpts = '<option value="">請選擇</option>' + districtList.map(d=>`<option value="${d}" ${d===e.district?'selected':''}>${d}</option>`).join('');
+  const catOpts = CATEGORIES.map(c=>`<option value="${c}" ${c===e.category?'selected':''}>${c}</option>`).join('');
+  const revisitOpts = ["😋想回訪","🤔想嘗試"].map(r=>`<option value="${r}" ${r===e.revisit?'selected':''}>${r}</option>`).join('');
+
+  return `
+    <div class="edit-form" data-edit-id="${e.id}">
+      <div class="row2">
+        <div>
+          <label>縣市</label>
+          <select class="ed-county">${countyOpts}</select>
+        </div>
+        <div>
+          <label>鄉鎮區</label>
+          <select class="ed-district">${districtOpts}</select>
+        </div>
+      </div>
+      <label>分類</label>
+      <select class="ed-category">${catOpts}</select>
+      <label>回訪意願</label>
+      <select class="ed-revisit">${revisitOpts}</select>
+      <label>美食店名</label>
+      <input type="text" class="ed-name" value="${escapeAttr(e.name||'')}">
+      <label>地址或地址連結</label>
+      <input type="text" class="ed-address" value="${escapeAttr(e.address||'')}">
+      <label>聯絡電話</label>
+      <input type="text" class="ed-phone" value="${escapeAttr(e.phone||'')}">
+      <label>補充說明</label>
+      <textarea class="ed-note">${escapeHtml(e.note||'')}</textarea>
+      <label>照片</label>
+      <div class="photo-grid ed-photo-grid"></div>
+      <label class="file-btn ed-photo-add-label">📷 新增照片</label>
+      <input type="file" class="ed-photo-add" accept="image/*" multiple style="display:none">
+      <p class="upload-status ed-upload-status">上傳中...</p>
+      <div class="edit-actions">
+        <button class="save-edit-btn" onclick="saveEdit('${e.id}', event)">儲存修改</button>
+        <button class="cancel-edit-btn" onclick="cancelEdit(event)">取消</button>
+      </div>
+    </div>
+  `;
+}
+
+// after render, wire up edit-form dynamic bits (photo grid, county->district, photo add)
+const observer = new MutationObserver(()=>{
+  document.querySelectorAll('.edit-form').forEach(form=>{
+    if(form.dataset.wired) return;
+    form.dataset.wired = '1';
+    const id = form.dataset.editId;
+    const e = { id, ...(entries[id]||{}) };
+    e._photos = getPhotos(e).slice();
+
+    function redrawPhotos(){
+      renderPhotoGrid_scoped(form.querySelector('.ed-photo-grid'), e._photos, (idx)=>{
+        e._photos.splice(idx,1);
+        redrawPhotos();
+      });
+    }
+    redrawPhotos();
+
+    const countySel = form.querySelector('.ed-county');
+    const districtSel = form.querySelector('.ed-district');
+    countySel.addEventListener('change', ()=>{
+      const list = COUNTY_DISTRICTS[countySel.value] || [];
+      districtSel.innerHTML = '<option value="">請選擇</option>' + list.map(d=>`<option value="${d}">${d}</option>`).join('');
+    });
+
+    const addInput = form.querySelector('.ed-photo-add');
+    const addLabel = form.querySelector('.ed-photo-add-label');
+    addLabel.setAttribute('for', '');
+    addLabel.addEventListener('click', ()=> addInput.click());
+    addInput.addEventListener('change', async (ev)=>{
+      const files = Array.from(ev.target.files || []);
+      if(!files.length) return;
+      const statusEl = form.querySelector('.ed-upload-status');
+      statusEl.style.display = 'block';
+      for(let i=0;i<files.length;i++){
+        statusEl.textContent = `上傳中... (${i+1}/${files.length})`;
+        try{
+          const url = await uploadOnePhoto(files[i]);
+          e._photos.push(url);
+          redrawPhotos();
+        }catch(err){ console.error(err); }
+      }
+      statusEl.textContent = '✓ 上傳完成';
+      setTimeout(()=>{ statusEl.style.display='none'; }, 1200);
+      ev.target.value = '';
+    });
+
+    form._getPhotos = ()=> e._photos;
+  });
+});
+observer.observe(document.getElementById('entry-list'), {childList:true, subtree:true});
+
+function renderPhotoGrid_scoped(el, urls, onRemove){
+  el.innerHTML = urls.map((u, idx)=>`
+    <div class="photo-thumb">
+      <img src="${u}">
+      <button class="rm" data-idx="${idx}">✕</button>
+    </div>
+  `).join('');
+  el.querySelectorAll('.rm').forEach(btn=>{
+    btn.addEventListener('click', ()=> onRemove(parseInt(btn.dataset.idx)));
+  });
+}
+
 function toggleEntry(id){
+  if(editEntryId === id) return;
   openEntryId = (openEntryId === id) ? null : id;
   filterAndRender();
 }
 
-async function deleteEntry(id, evt){
+function startEdit(id, evt){
   evt.stopPropagation();
-  if(!confirm('確定要刪除這筆紀錄嗎？')) return;
+  if(!isLoggedIn()){ openLoginModal(); return; }
+  editEntryId = id;
+  openEntryId = id;
+  filterAndRender();
+}
+
+function cancelEdit(evt){
+  evt.stopPropagation();
+  editEntryId = null;
+  filterAndRender();
+}
+
+async function saveEdit(id, evt){
+  evt.stopPropagation();
+  const form = document.querySelector(`.edit-form[data-edit-id="${id}"]`);
+  if(!form) return;
+
+  const county = form.querySelector('.ed-county').value;
+  const district = form.querySelector('.ed-district').value;
+  const category = form.querySelector('.ed-category').value;
+  const revisit = form.querySelector('.ed-revisit').value;
+  const name = form.querySelector('.ed-name').value.trim();
+  const address = form.querySelector('.ed-address').value.trim();
+  const phone = form.querySelector('.ed-phone').value.trim();
+  const note = form.querySelector('.ed-note').value.trim();
+  const photos = form._getPhotos ? form._getPhotos() : [];
+
+  if(!name){
+    alert('店名不能空白');
+    return;
+  }
+
   try{
-    await entriesRef.child(id).remove();
+    await entriesRef.child(id).update({
+      county, district, category, revisit, name, address, phone, note,
+      photos: photos.length ? photos : null
+    });
+    editEntryId = null;
   }catch(err){
     console.error(err);
-    alert('刪除失敗，請再試一次');
+    alert('儲存失敗，請再試一次：' + err.message);
   }
 }
 
-document.getElementById('filter-county').addEventListener('change', filterAndRender);
+async function deleteEntry(id, evt){
+  evt.stopPropagation();
+  if(!isLoggedIn()){ openLoginModal(); return; }
+  if(!confirm('🔔 確定要刪除這筆紀錄嗎？此動作無法復原。')) return;
+  await entriesRef.child(id).remove();
+  if(openEntryId === id) openEntryId = null;
+  if(editEntryId === id) editEntryId = null;
+}
+
+document.getElementById('filter-district').addEventListener('change', filterAndRender);
 document.getElementById('filter-category').addEventListener('change', filterAndRender);
+document.getElementById('filter-revisit').addEventListener('change', filterAndRender);
 
 function escapeHtml(s){
   return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -569,6 +1084,7 @@ function escapeHtml(s){
 function escapeAttr(s){ return escapeHtml(s); }
 
 populateCounties();
+applyAuthState();
 </script>
 </body>
 </html>
