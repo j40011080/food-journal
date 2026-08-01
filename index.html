@@ -126,6 +126,24 @@
     border-radius:10px;
     margin-left:6px;
   }
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:26px;
+    transform:translateX(-50%) translateY(10px);
+    background:var(--sage);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:24px;
+    font-size:13.5px;
+    font-weight:700;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    opacity:0;
+    transition:all .25s ease;
+    pointer-events:none;
+    z-index:100;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .eyebrow{
     font-size:12px;
     letter-spacing:0.24em;
@@ -542,6 +560,8 @@
     <div id="entry-list"><div class="loading">讀取中...</div></div>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -1059,6 +1079,9 @@ async function saveEdit(id, evt){
       photos: photos.length ? photos : null
     });
     editEntryId = null;
+    openEntryId = id;
+    filterAndRender();
+    showToast('✓ 已儲存修改');
   }catch(err){
     console.error(err);
     alert('儲存失敗，請再試一次：' + err.message);
@@ -1082,6 +1105,14 @@ function escapeHtml(s){
   return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function escapeAttr(s){ return escapeHtml(s); }
+
+function showToast(text){
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(()=>{ t.classList.remove('show'); }, 2200);
+}
 
 populateCounties();
 applyAuthState();
