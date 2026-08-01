@@ -340,11 +340,20 @@
     font-size:16px;
     color:#fff;
   }
-  .cat-西式{background:var(--chili);}
-  .cat-中式{background:var(--turmeric);color:var(--ink);}
+  .cat-西式{background:#C1502E;}
+  .cat-中式{background:#D9A02D;color:var(--ink);}
+  .cat-日式{background:#3E7C8C;}
+  .cat-港式{background:#B2874B;}
   .cat-韓式{background:#B23A6B;}
-  .cat-泰式{background:var(--sage);}
-  .cat-越式{background:#3E7C8C;}
+  .cat-美式{background:#4C6FA6;}
+  .cat-義式{background:#7A9B57;}
+  .cat-泰式{background:#6B8F71;}
+  .cat-越式{background:#2F6F5E;}
+  .cat-素食{background:#4F9D69;}
+  .cat-火鍋{background:#A8332B;}
+  .cat-燒肉{background:#8C3B2E;}
+  .cat-小吃{background:#C97B3D;}
+  .cat-宵夜{background:#5B4B8A;}
   .cat-其他{background:#8A7E68;}
 
   .entry-title{flex:1;min-width:0;}
@@ -497,9 +506,18 @@
       <select id="f-category">
         <option value="西式">西式</option>
         <option value="中式">中式</option>
+        <option value="日式">日式</option>
+        <option value="港式">港式</option>
         <option value="韓式">韓式</option>
+        <option value="美式">美式</option>
+        <option value="義式">義式</option>
         <option value="泰式">泰式</option>
         <option value="越式">越式</option>
+        <option value="素食">素食</option>
+        <option value="火鍋">火鍋</option>
+        <option value="燒肉">燒肉</option>
+        <option value="小吃">小吃</option>
+        <option value="宵夜">宵夜</option>
         <option value="其他">其他</option>
       </select>
 
@@ -545,9 +563,18 @@
         <option value="">全部分類</option>
         <option value="西式">西式</option>
         <option value="中式">中式</option>
+        <option value="日式">日式</option>
+        <option value="港式">港式</option>
         <option value="韓式">韓式</option>
+        <option value="美式">美式</option>
+        <option value="義式">義式</option>
         <option value="泰式">泰式</option>
         <option value="越式">越式</option>
+        <option value="素食">素食</option>
+        <option value="火鍋">火鍋</option>
+        <option value="燒肉">燒肉</option>
+        <option value="小吃">小吃</option>
+        <option value="宵夜">宵夜</option>
         <option value="其他">其他</option>
       </select>
       <select id="filter-revisit">
@@ -582,7 +609,7 @@ const db = firebase.database();
 const storage = firebase.storage();
 const entriesRef = db.ref('entries');
 
-const CATEGORIES = ["西式","中式","韓式","泰式","越式","其他"];
+const CATEGORIES = ["西式","中式","日式","港式","韓式","美式","義式","泰式","越式","素食","火鍋","燒肉","小吃","宵夜","其他"];
 
 const COUNTY_DISTRICTS = {
   "台北市": ["中正區","大同區","中山區","松山區","大安區","萬華區","信義區","士林區","北投區","內湖區","南港區","文山區"],
@@ -839,6 +866,7 @@ document.getElementById('submit-btn').addEventListener('click', async ()=>{
     const msg = document.getElementById('status-msg');
     msg.style.display = 'block';
     setTimeout(()=>{ msg.style.display = 'none'; }, 2200);
+    showToast('✓ 已儲存這筆紀錄！');
   }catch(err){
     console.error(err);
     alert('儲存失敗，請再試一次：' + err.message);
@@ -888,10 +916,7 @@ function filterAndRender(){
     if(isEditing){
       bodyHtml = renderEditForm(e);
     }else{
-      const isLink = /^https?:\/\//i.test(e.address || '');
-      const addressHtml = e.address
-        ? (isLink ? `<a href="${escapeAttr(e.address)}" target="_blank" rel="noopener">${escapeHtml(e.address)}</a>` : escapeHtml(e.address))
-        : '（未填寫）';
+      const addressHtml = linkifyAddress(e.address);
       const phoneHtml = e.phone ? `<a href="tel:${escapeAttr(e.phone)}">${escapeHtml(e.phone)}</a>` : '';
       bodyHtml = `
         <div class="field">
@@ -1105,6 +1130,22 @@ function escapeHtml(s){
   return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function escapeAttr(s){ return escapeHtml(s); }
+
+function linkifyAddress(text){
+  if(!text) return '（未填寫）';
+  const urlRegex = /(https?:\/\/[^\s]+)/gi;
+  let result = '';
+  let lastIndex = 0;
+  let match;
+  while((match = urlRegex.exec(text)) !== null){
+    result += escapeHtml(text.slice(lastIndex, match.index));
+    const url = match[0];
+    result += `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`;
+    lastIndex = match.index + url.length;
+  }
+  result += escapeHtml(text.slice(lastIndex));
+  return result;
+}
 
 function showToast(text){
   const t = document.getElementById('toast');
