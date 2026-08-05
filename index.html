@@ -406,6 +406,34 @@
   .entry-body a{color:var(--chili);word-break:break-all;}
   .entry-body .note{font-size:13.5px;line-height:1.6;color:var(--ink-2);}
   .view-photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .photo-lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(10,8,5,0.92);
+    z-index:80;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .photo-lightbox.show{display:flex;}
+  .photo-lightbox img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:10px;
+    object-fit:contain;
+  }
+  .photo-lightbox .lb-close{
+    position:absolute;
+    top:18px;right:18px;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:rgba(251,246,236,0.15);
+    color:var(--paper);
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+  }
   .view-photo-grid img{
     width:104px;height:104px;
     object-fit:cover;
@@ -627,6 +655,11 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="photo-lightbox" id="photo-lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" onclick="event.stopPropagation()">
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -981,7 +1014,7 @@ function filterAndRender(){
         ${e.recommend ? `<div class="field"><div class="field-label">推薦</div><div>${recommendHtml}</div></div>` : ''}
         ${e.introUrl ? `<div class="field"><div class="field-label">介紹網址</div><div>${introHtml}</div></div>` : ''}
         ${e.note ? `<div class="field"><div class="field-label">補充</div><div class="note">${escapeHtml(e.note)}</div></div>` : ''}
-        ${photos.length ? `<div class="field"><div class="field-label">照片</div><div class="view-photo-grid">${photos.map(p=>`<img src="${p}" loading="lazy" onclick="window.open('${p}','_blank')">`).join('')}</div></div>` : ''}
+        ${photos.length ? `<div class="field"><div class="field-label">照片</div><div class="view-photo-grid">${photos.map(p=>`<img src="${p}" loading="lazy" onclick="openLightbox(this.src)">`).join('')}</div></div>` : ''}
         ${isLoggedIn() ? `
         <div class="action-row">
           <button class="edit-btn" onclick="startEdit('${e.id}', event)">✏️ 編輯</button>
@@ -1230,6 +1263,15 @@ function showToast(text){
   t.classList.add('show');
   clearTimeout(showToast._timer);
   showToast._timer = setTimeout(()=>{ t.classList.remove('show'); }, 2200);
+}
+
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('photo-lightbox').classList.add('show');
+}
+function closeLightbox(){
+  document.getElementById('photo-lightbox').classList.remove('show');
+  document.getElementById('lightbox-img').src = '';
 }
 
 populateCounties();
