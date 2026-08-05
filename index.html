@@ -556,7 +556,7 @@
       <label>訂位</label>
       <div class="radio-row">
         <label class="radio-opt"><input type="radio" name="f-reservation" value="要"> 要</label>
-        <label class="radio-opt"><input type="radio" name="f-reservation" value="不要" checked> 不要</label>
+        <label class="radio-opt"><input type="radio" name="f-reservation" value="不用" checked> 不用</label>
       </div>
 
       <label for="f-address">地址</label>
@@ -630,7 +630,6 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
 <script>
 const firebaseConfig = {
@@ -644,7 +643,6 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const storage = firebase.storage();
 const entriesRef = db.ref('entries');
 
 const CATEGORIES = ["西式","中式","日式","港式","韓式","美式","義式","泰式","越式","素食","火鍋","燒肉","小吃","宵夜","其他"];
@@ -799,14 +797,16 @@ document.getElementById('f-photo').addEventListener('change', async (e)=>{
   statusEl.style.display = 'block';
 
   for(let i=0;i<files.length;i++){
-    statusEl.textContent = `上傳中... (${i+1}/${files.length})`;
+    statusEl.textContent = `上傳中 (${i+1}/${files.length})... 0%`;
     try{
-      const url = await uploadOnePhoto(files[i]);
+      const url = await uploadOnePhoto(files[i], (pct)=>{
+        statusEl.textContent = `上傳中 (${i+1}/${files.length})... ${pct}%`;
+      });
       pendingPhotos.push(url);
       redrawAddPhotos();
     }catch(err){
       console.error(err);
-      alert('有一張照片上傳失敗，請再試一次');
+      alert('照片處理失敗，請換一張圖片再試一次。錯誤訊息：' + (err.message||err.code||err));
     }
   }
   statusEl.textContent = '✓ 上傳完成';
@@ -814,16 +814,17 @@ document.getElementById('f-photo').addEventListener('change', async (e)=>{
   e.target.value = '';
 });
 
-async function uploadOnePhoto(file){
-  const compressed = await compressImage(file, 900, 0.7);
-  const path = `photos/${Date.now()}_${Math.random().toString(36).slice(2,8)}.jpg`;
-  const ref = storage.ref(path);
-  await ref.put(compressed);
-  return await ref.getDownloadURL();
+function uploadOnePhoto(file, onProgress){
+  // 不使用 Firebase Storage（需要付費方案），改為壓縮後直接存成 base64 字串進 Realtime Database
+  if(onProgress) onProgress(30);
+  return compressImageToDataURL(file, 1000, 0.6).then(dataUrl=>{
+    if(onProgress) onProgress(100);
+    return dataUrl;
+  });
 }
 
-function compressImage(file, maxW, quality){
-  return new Promise((resolve)=>{
+function compressImageToDataURL(file, maxW, quality){
+  return new Promise((resolve, reject)=>{
     const reader = new FileReader();
     reader.onload = (ev)=>{
       const img = new Image();
@@ -834,10 +835,12 @@ function compressImage(file, maxW, quality){
         canvas.height = img.height * scale;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(resolve, 'image/jpeg', quality);
+        resolve(canvas.toDataURL('image/jpeg', quality));
       };
+      img.onerror = ()=> reject(new Error('圖片讀取失敗'));
       img.src = ev.target.result;
     };
+    reader.onerror = ()=> reject(new Error('檔案讀取失敗'));
     reader.readAsDataURL(file);
   });
 }
@@ -905,7 +908,7 @@ document.getElementById('submit-btn').addEventListener('click', async ()=>{
     document.getElementById('f-introurl').value = '';
     document.getElementById('f-note').value = '';
     document.getElementById('f-photo').value = '';
-    document.querySelector('input[name="f-reservation"][value="不要"]').checked = true;
+    document.querySelector('input[name="f-reservation"][value="不用"]').checked = true;
     pendingPhotos = [];
     renderPhotoGrid('f-photo-grid', pendingPhotos);
 
@@ -968,7 +971,7 @@ function filterAndRender(){
       const recommendHtml = linkifyAddress(e.recommend);
       const introHtml = linkifyAddress(e.introUrl);
       bodyHtml = `
-        ${e.reservation ? `<div class="field"><div class="field-label">訂位</div><div>${e.reservation === '要' ? '✅ 要' : '⬜ 不要'}</div></div>` : ''}
+        ${e.reservation ? `<div class="field"><div class="field-label">訂位</div><div>${e.reservation === '要' ? '✅ 要' : '⬜ 不用'}</div></div>` : ''}
         <div class="field">
           <div class="field-label">地址</div>
           <div>${addressHtml}</div>
@@ -1032,7 +1035,7 @@ function renderEditForm(e){
       <label>訂位</label>
       <div class="radio-row">
         <label class="radio-opt"><input type="radio" name="ed-reservation-${e.id}" class="ed-reservation" value="要" ${e.reservation==='要'?'checked':''}> 要</label>
-        <label class="radio-opt"><input type="radio" name="ed-reservation-${e.id}" class="ed-reservation" value="不要" ${e.reservation!=='要'?'checked':''}> 不要</label>
+        <label class="radio-opt"><input type="radio" name="ed-reservation-${e.id}" class="ed-reservation" value="不用" ${e.reservation!=='要'?'checked':''}> 不用</label>
       </div>
       <label>地址</label>
       <input type="text" class="ed-address" value="${escapeAttr(e.address||'')}">
@@ -1093,12 +1096,17 @@ const observer = new MutationObserver(()=>{
       const statusEl = form.querySelector('.ed-upload-status');
       statusEl.style.display = 'block';
       for(let i=0;i<files.length;i++){
-        statusEl.textContent = `上傳中... (${i+1}/${files.length})`;
+        statusEl.textContent = `上傳中 (${i+1}/${files.length})... 0%`;
         try{
-          const url = await uploadOnePhoto(files[i]);
+          const url = await uploadOnePhoto(files[i], (pct)=>{
+            statusEl.textContent = `上傳中 (${i+1}/${files.length})... ${pct}%`;
+          });
           e._photos.push(url);
           redrawPhotos();
-        }catch(err){ console.error(err); }
+        }catch(err){
+          console.error(err);
+          alert('照片處理失敗，請換一張圖片再試一次。');
+        }
       }
       statusEl.textContent = '✓ 上傳完成';
       setTimeout(()=>{ statusEl.style.display='none'; }, 1200);
@@ -1153,7 +1161,7 @@ async function saveEdit(id, evt){
   const revisit = form.querySelector('.ed-revisit').value;
   const name = form.querySelector('.ed-name').value.trim();
   const reservationEl = form.querySelector('.ed-reservation:checked');
-  const reservation = reservationEl ? reservationEl.value : '不要';
+  const reservation = reservationEl ? reservationEl.value : '不用';
   const address = form.querySelector('.ed-address').value.trim();
   const navLink = form.querySelector('.ed-navlink').value.trim();
   const phone = form.querySelector('.ed-phone').value.trim();
